@@ -69,6 +69,32 @@
 
             </div>
 
+            {{-- select per le technology --}}
+
+            <div class="mb-3">
+                <label for="technologies" class="form-label">Select Tecnologies</label>
+
+                <select
+                 multiple
+                 class="form-select form-select-md"
+                 name="technologies[]"
+                 id="technologies">
+                 <option value="">Select Technologies</option>
+
+                 @forelse ($technologies as $item)
+
+                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+
+                 @empty
+
+                    <option value="">There are no technologies</option>
+
+                 @endforelse
+
+                </select>
+
+            </div>
+
 
             <div class="mb-3">
                 <label for="content" class="form-label">Content</label>
