@@ -79,6 +79,40 @@
 
             </div>
 
+             {{-- select per le technology --}}
+
+            <div class="mb-3">
+                <label for="technologies" class="form-label">Select Tecnologies</label>
+
+                <select
+                 multiple
+                 class="form-select form-select-md"
+                 name="technologies[]"
+                 id="technologies">
+                 <option value="">Select Technologies</option>
+
+                 @forelse ($technologies as $item)
+
+                    @if ( $errors->any())
+
+                        <option value="{{ $item->id }}" {{ in_array($item->id, old('technologies',[])) ? 'selected' : '' }}>{{ $item->name }}</option>
+
+                        @else
+
+                        <option value="{{ $item->id }}" {{ $project->technologies->contains($item->id) ? 'selected' : '' }}>{{ $item->name }}</option>
+
+                    @endif
+
+                 @empty
+
+                    <option value="">There are no technologies</option>
+
+                 @endforelse
+
+                </select>
+
+            </div>
+
             <div class="mb-3">
                 <label for="content" class="form-label">Content</label>
                 <textarea class="form-control" name="content" id="content" rows="3">{{ old('content') ?? $projects->content }}</textarea>
