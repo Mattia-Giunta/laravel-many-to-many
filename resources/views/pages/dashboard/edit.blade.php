@@ -99,7 +99,7 @@
 
                         @else
 
-                        <option value="{{ $item->id }}" {{ $project->technologies->contains($item->id) ? 'selected' : '' }}>{{ $item->name }}</option>
+                        <option value="{{ $item->id }}" {{ $projects->technologies->contains($item->id) ? 'selected' : '' }}>{{ $item->name }}</option>
 
                     @endif
 
