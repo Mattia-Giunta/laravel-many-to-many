@@ -58,6 +58,10 @@ class ProjectController extends Controller
 
         $new_project = Project::create($val_data);
 
+        if( $request->has('technologies') ){
+            $new_project->technologies()->attach( $request->technologies );
+        }
+
         return redirect()->route('dashboard.project.index');
     }
 
@@ -104,6 +108,10 @@ class ProjectController extends Controller
 
         $projects->update($formData);
 
+        if( $request->has('technologies') ){
+            $projects->technologies()->sync( $request->technologies );
+        }
+
         return redirect()->route('dashboard.project.index');
     }
 
@@ -113,6 +121,8 @@ class ProjectController extends Controller
     public function destroy(string $id)
     {
         $projects = Project::find($id);
+
+        $projects->technologies()->sync([]);
 
         if( $projects->cover_image ){
             Storage::delete($projects->cover_image);
